@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BoyScout App Redirect</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            margin-top: 30vh;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            if (/android/i.test(userAgent)) {
+                window.location.href = "https://play.google.com/store/apps/details?id=YOUR_ANDROID_PACKAGE";
+            } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
+                window.location.href = "https://apps.apple.com/app/idYOUR_IOS_APPID";
+            } else {
+                // PCなどスマホ以外の場合はメッセージ表示
+                document.getElementById("message").style.display = "block";
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <p id="message" style="display: none;">
+        このリンクはスマートフォンでご利用ください📱<br>
+        QRコードをスマートフォンのカメラで読み取ってください。
+    </p>
+</body>
+
+</html>
