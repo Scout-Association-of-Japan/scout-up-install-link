@@ -17,9 +17,9 @@
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
             if (/android/i.test(userAgent)) {
-                window.location.href = "https://apps.apple.com/jp/app/id6744021399";
-            } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
                 window.location.href = "https://play.google.com/store/apps/details?id=org.ScoutAssociationofJapan.scoutup.android";
+            } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
+                window.location.href = "https://apps.apple.com/jp/app/id6744021399";
             } else {
                 // PCなどスマホ以外の場合はメッセージ表示
                 document.getElementById("message").style.display = "block";
