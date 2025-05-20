@@ -2,26 +2,29 @@
 <html lang="ja">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BoyScout App Redirect</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BoyScout UP! Install Link</title>
     <style>
         body {
             font-family: sans-serif;
             text-align: center;
-            margin-top: 30vh;
+            padding-top: 20vh;
+        }
+
+        .message {
+            font-size: 1.2em;
+            line-height: 2em;
         }
     </style>
     <script>
         window.onload = function () {
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-            if (/android/i.test(userAgent)) {
-                window.location.href = "https://play.google.com/store/apps/details?id=org.ScoutAssociationofJapan.scoutup.android";
-            } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
+            if (/iPhone|iPad|iPod/.test(userAgent)) {
                 window.location.href = "https://apps.apple.com/jp/app/id6744021399";
             } else {
-                // PCなどスマホ以外の場合はメッセージ表示
+                // AndroidやPCはこちらのメッセージ表示
                 document.getElementById("message").style.display = "block";
             }
         };
@@ -29,10 +32,10 @@
 </head>
 
 <body>
-    <p id="message" style="display: none;">
-        このリンクはスマートフォンでご利用ください📱<br>
-        QRコードをお持ちのスマートフォンのカメラで読み取ってください。
-    </p>
+    <div id="message" class="message" style="display: none;">
+        現在、<strong>Android版は絶賛準備中</strong>です。<br />
+        お楽しみに、お待ちください🙇‍♂️
+    </div>
 </body>
 
 </html>
