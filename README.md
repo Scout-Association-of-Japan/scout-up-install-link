@@ -5,20 +5,17 @@ BoyScout UP!アプリのインストールリンクページです。
 ## 機能
 
 - **デバイス自動判定**: ユーザーのデバイス（iOS/Android）を自動判定
-- **アプリ起動**: 既にアプリがインストールされている場合、アプリを直接起動
-- **ストアリダイレクト**: アプリが未インストールの場合、適切なアプリストアへリダイレクト
+- **ストアリダイレクト**: 適切なアプリストアへ直接リダイレクト
   - iOS: App Store
   - Android: Google Play Store
 
 ## 動作仕様
 
 ### iOS
-1. カスタムURLスキーム `scoutup://` でアプリ起動を試行
-2. 2秒以内にアプリが起動しない場合、App Storeへリダイレクト
+- App Storeへ直接リダイレクト（インストール・アップデート両方に対応）
 
 ### Android
-1. Intent URL `intent://open#Intent;scheme=scoutup;package=org.ScoutAssociationofJapan.scoutup;end` でアプリ起動を試行
-2. 2秒以内にアプリが起動しない場合、Google Play Storeへリダイレクト
+- Google Play Storeへ直接リダイレクト（インストール・アップデート両方に対応）
 
 ### その他のデバイス
 - PC等のモバイル以外のデバイスには、スマートフォンからアクセスするよう案内メッセージを表示

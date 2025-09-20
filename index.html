@@ -22,30 +22,24 @@
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
             if (/iPhone|iPad|iPod/.test(userAgent)) {
-                // iOS: アプリがインストール済みの場合はアプリを開く、未インストールの場合はApp Storeへ
-                tryOpenApp("scoutup://", "https://apps.apple.com/jp/app/id6744021399");
+                // iOSはApp Storeへ直接リダイレクト
+                window.location.href = "https://apps.apple.com/jp/app/id6744021399";
             } else if (/Android/.test(userAgent)) {
-                // Android: アプリがインストール済みの場合はアプリを開く、未インストールの場合はGoogle Play Storeへ
-                tryOpenApp("intent://open#Intent;scheme=scoutup;package=org.ScoutAssociationofJapan.scoutup;end", "https://play.google.com/store/apps/details?id=org.ScoutAssociationofJapan.scoutup");
+                // AndroidはGoogle Play Storeへリダイレクト（フォールバック付き）
+                try {
+                    window.location.href = "market://details?id=org.ScoutAssociationofJapan.scoutup";
+                    // フォールバック: market://が動作しない場合はhttps://に変更
+                    setTimeout(function() {
+                        window.location.href = "https://play.google.com/store/apps/details?id=org.ScoutAssociationofJapan.scoutup";
+                    }, 1000);
+                } catch (e) {
+                    window.location.href = "https://play.google.com/store/apps/details?id=org.ScoutAssociationofJapan.scoutup";
+                }
             } else {
                 // PCなどその他のデバイス
                 document.getElementById("message").style.display = "block";
             }
         };
-
-        function tryOpenApp(appUrl, storeUrl) {
-            // アプリを開く試行
-            const startTime = Date.now();
-            window.location.href = appUrl;
-
-            // 一定時間後にアプリが開かなかった場合はストアへリダイレクト
-            setTimeout(function() {
-                // ページがまだアクティブ（アプリが開かなかった）場合はストアへ
-                if (Date.now() - startTime < 2500) {
-                    window.location.href = storeUrl;
-                }
-            }, 2000);
-        }
     </script>
 </head>
 
