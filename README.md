@@ -1,6 +1,6 @@
-# BoyScout UP! Install Link
+# Scout UP! Install Link
 
-BoyScout UP!アプリのインストールリンクページです。
+Scout UP!アプリのインストールリンクページです。
 
 ## 機能
 

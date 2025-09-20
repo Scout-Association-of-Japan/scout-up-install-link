@@ -4,17 +4,206 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BoyScout UP! Install Link</title>
+    <title>Scout UP! Install Link</title>
+
+    <!-- OGP Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Scout UP! - ボーイスカウト公式アプリ" />
+    <meta property="og:description" content="Scout UP!はボーイスカウト日本連盟の公式モバイルアプリです。スマートフォン または タブレットからアクセスしてダウンロードしてください。" />
+    <meta property="og:url" content="https://scout-up.scout.or.jp/" />
+    <meta property="og:image" content="https://scout-up.scout.or.jp/Scout UP! OGP.png" />
+    <meta property="og:image:alt" content="Scout UP! アプリロゴ" />
+    <meta property="og:site_name" content="Scout UP!" />
+    <meta name="description" content="Scout UP!はボーイスカウト日本連盟の公式モバイルアプリです。iOS・Androidに対応。" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Scout UP! - ボーイスカウト公式アプリ" />
+    <meta name="twitter:description" content="Scout UP!はボーイスカウト日本連盟の公式モバイルアプリです。スマートフォン または タブレットからアクセスしてダウンロードしてください。" />
+    <meta name="twitter:image" content="https://scout-up.scout.or.jp/Scout UP! OGP.png" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://scout-up.scout.or.jp/" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://www.scout.or.jp/wp-content/themes/saj-hp/img/favicon.ico" type="image/x-icon" />
     <style>
         body {
-            font-family: sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
-            padding-top: 20vh;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            padding-top: 5vh;
+            background: linear-gradient(135deg, #f8fffe 0%, #e8f5f0 100%);
+            min-height: 100vh;
+            color: #2c3e50;
         }
 
         .message {
             font-size: 1.2em;
-            line-height: 2em;
+            line-height: 1.8em;
+            margin-bottom: 30px;
+        }
+
+        .qr-container {
+            margin: 30px 0;
+            padding: 25px;
+            border: 2px solid #01664B;
+            border-radius: 15px;
+            background: linear-gradient(145deg, #ffffff 0%, #f8fffe 100%);
+            box-shadow: 0 8px 25px rgba(1, 102, 75, 0.15);
+        }
+
+        .qr-container h3 {
+            color: #01664B;
+            margin-top: 0;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .url-container {
+            margin: 20px 0;
+            padding: 15px;
+            background: linear-gradient(145deg, #01664B 0%, #018656 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            box-shadow: 0 6px 20px rgba(1, 102, 75, 0.3);
+        }
+
+        .url-text {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            word-break: break-all;
+            flex: 1;
+            min-width: 200px;
+            color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .copy-btn {
+            background: linear-gradient(145deg, #ffffff 0%, #f0f9f6 100%);
+            color: #01664B;
+            border: 2px solid #01664B;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: linear-gradient(145deg, #01664B 0%, #018656 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(1, 102, 75, 0.3);
+        }
+
+        .copy-btn:active {
+            background: linear-gradient(145deg, #004a35 0%, #015b42 100%);
+            color: white;
+            transform: translateY(0);
+            box-shadow: 0 2px 6px rgba(1, 102, 75, 0.4);
+        }
+
+        .instructions {
+            text-align: left;
+            margin: 25px 0;
+            padding: 25px;
+            background: linear-gradient(145deg, #e8f5f0 0%, #d1f2e8 100%);
+            border-radius: 12px;
+            border-left: 5px solid #01664B;
+            box-shadow: 0 4px 15px rgba(1, 102, 75, 0.1);
+        }
+
+        .instructions h3 {
+            color: #01664B;
+            margin-top: 0;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        .instructions ol {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin: 12px 0;
+            line-height: 1.7;
+            color: #2c5240;
+        }
+
+        .app-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #01664B 0%, #018656 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: #01664B; /* フォールバック用 */
+            margin-bottom: 25px;
+            text-shadow: 0 2px 4px rgba(1, 102, 75, 0.1);
+            line-height: 1.2;
+            padding: 0 10px;
+            word-break: keep-all;
+            overflow-wrap: normal;
+        }
+
+        .message p {
+            color: #2c5240;
+            font-size: 1.1em;
+        }
+
+        .qr-container p {
+            color: #4a6852;
+        }
+
+        .copyright {
+            margin-top: 40px;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #4a6852;
+            border-top: 1px solid rgba(1, 102, 75, 0.2);
+        }
+
+        #qr-code {
+            border: 3px solid #01664B;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: white;
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 480px) {
+            .app-title {
+                font-size: 2em;
+                padding: 0 5px;
+            }
+
+            body {
+                padding: 15px;
+                padding-top: 3vh;
+            }
+
+            .url-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .url-text {
+                min-width: unset;
+                width: 100%;
+            }
         }
     </style>
     <script>
@@ -38,15 +227,65 @@
             } else {
                 // PCなどその他のデバイス
                 document.getElementById("message").style.display = "block";
+                setupCopyButton();
             }
         };
+
+
+        function setupCopyButton() {
+            const copyBtn = document.getElementById('copy-btn');
+            copyBtn.addEventListener('click', function() {
+                const canonicalUrl = 'https://scout-up.scout.or.jp/';
+
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(canonicalUrl).then(function() {
+                        copyBtn.textContent = 'コピーしました！';
+                        setTimeout(function() {
+                            copyBtn.textContent = 'URLをコピー';
+                        }, 2000);
+                    });
+                } else {
+                    // フォールバック: 古いブラウザ対応
+                    const textArea = document.createElement('textarea');
+                    textArea.value = canonicalUrl;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+
+                    copyBtn.textContent = 'コピーしました！';
+                    setTimeout(function() {
+                        copyBtn.textContent = 'URLをコピー';
+                    }, 2000);
+                }
+            });
+        }
     </script>
 </head>
 
 <body>
     <div id="message" class="message" style="display: none;">
-        <strong>BoyScout UP!</strong>はモバイルアプリです。<br />
-        スマートフォンからアクセスしてください📱
+        <div class="app-title">Scout UP!</div>
+
+        <p><strong>Scout UP!</strong>はモバイルアプリです。<br />
+        お手持ちのスマートフォン または タブレットから<br>以下のQRコードにアクセスしてください</p>
+
+        <div class="qr-container">
+            <h3> QRコードでアクセス</h3>
+            <img id="qr-code" src="qr-code.png" alt="QR Code for Scout UP! install link" style="max-width: 200px; height: auto;" />
+            <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                お手持ちのスマートフォンのカメラでQRコードを読み取ってください
+            </p>
+        </div>
+
+        <div class="url-container">
+            <span class="url-text" id="current-url">https://scout-up.scout.or.jp/</span>
+            <button id="copy-btn" class="copy-btn">URLをコピー</button>
+        </div>
+
+        <div class="copyright">
+            &copy; Scout Association of Japan. All Rights Reserved.
+        </div>
     </div>
 </body>
 
