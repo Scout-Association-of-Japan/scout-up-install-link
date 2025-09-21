@@ -11,16 +11,21 @@
     <meta property="og:title" content="Scout UP! - ボーイスカウト公式アプリ" />
     <meta property="og:description" content="Scout UP!はボーイスカウト日本連盟の公式モバイルアプリです。スマートフォン または タブレットからアクセスしてダウンロードしてください。" />
     <meta property="og:url" content="https://scout-up.scout.or.jp/" />
-    <meta property="og:image" content="/Scout-UP-OGP.png" />
+    <meta property="og:image" content="https://scout-up.scout.or.jp/Scout-UP-OGP.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:alt" content="Scout UP! アプリロゴ" />
     <meta property="og:site_name" content="Scout UP!" />
+    <meta property="og:locale" content="ja_JP" />
     <meta name="description" content="Scout UP!はボーイスカウト日本連盟の公式モバイルアプリです。iOS・Androidに対応。" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@scout_japan" />
     <meta name="twitter:title" content="Scout UP! - ボーイスカウト公式アプリ" />
     <meta name="twitter:description" content="Scout UP!はボーイスカウト日本連盟の公式モバイルアプリです。スマートフォン または タブレットからアクセスしてダウンロードしてください。" />
-    <meta name="twitter:image" content="https://scout-up.scout.or.jp/Scout UP! OGP.png" />
+    <meta name="twitter:image" content="https://scout-up.scout.or.jp/Scout-UP-OGP.jpg" />
 
     <!-- Canonical URL -->
     <link rel="canonical" href="https://scout-up.scout.or.jp/" />
@@ -77,13 +82,13 @@
 
         .url-text {
             font-family: 'Courier New', monospace;
-            font-size: 13px;
+            font-size: 19px;
             word-break: break-all;
             flex: 1;
             min-width: 200px;
             color: #ffffff;
             background-color: rgba(255, 255, 255, 0.1);
-            padding: 8px 12px;
+            padding: 12px 16px;
             border-radius: 6px;
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
@@ -98,18 +103,21 @@
             font-size: 14px;
             font-weight: 600;
             transition: all 0.3s ease;
+            min-width: 150px;
+            white-space: nowrap;
         }
 
         .copy-btn:hover {
-            background: linear-gradient(145deg, #01664B 0%, #018656 100%);
-            color: white;
+            background: linear-gradient(145deg, #e8f5f0 0%, #d1f2e8 100%);
+            color: #004a35;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(1, 102, 75, 0.3);
+            border-color: #004a35;
         }
 
         .copy-btn:active {
-            background: linear-gradient(145deg, #004a35 0%, #015b42 100%);
-            color: white;
+            background: linear-gradient(145deg, #d1f2e8 0%, #b8ead4 100%);
+            color: #004a35;
             transform: translateY(0);
             box-shadow: 0 2px 6px rgba(1, 102, 75, 0.4);
         }
@@ -156,6 +164,19 @@
             padding: 0 10px;
             word-break: keep-all;
             overflow-wrap: normal;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .app-logo {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(1, 102, 75, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.8);
         }
 
         .message p {
@@ -188,6 +209,13 @@
             .app-title {
                 font-size: 2em;
                 padding: 0 5px;
+                gap: 10px;
+            }
+
+            .app-logo {
+                width: 45px;
+                height: 45px;
+                border-radius: 9px;
             }
 
             body {
@@ -265,10 +293,13 @@
 
 <body>
     <div id="message" class="message" style="display: none;">
-        <div class="app-title">Scout UP!</div>
+        <div class="app-title">
+            <img src="icon.png" alt="Scout UP! Logo" class="app-logo">
+            Scout UP!
+        </div>
 
         <p><strong>Scout UP!</strong>はモバイルアプリです。<br />
-        お手持ちのスマートフォン または タブレットから<br>以下のQRコードにアクセスしてください</p>
+        お手持ちのスマートフォン または タブレットから<br>以下のQRコードにアクセスしてください。</p>
 
         <div class="qr-container">
             <h3> QRコードでアクセス</h3>
