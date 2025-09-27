@@ -270,6 +270,65 @@
             color: #856404;
         }
 
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f8fffe 0%, #e8f5f0 100%);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1000;
+            color: #01664B;
+        }
+
+        .loading-screen.show {
+            display: flex;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e8f5f0;
+            border-top: 4px solid #01664B;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 1.2em;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .loading-subtext {
+            font-size: 0.9em;
+            text-align: center;
+            color: #4a6852;
+        }
+
+        .mobile-redirect {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            padding-top: 5vh;
+            background: linear-gradient(135deg, #f8fffe 0%, #e8f5f0 100%);
+            min-height: 100vh;
+            color: #2c3e50;
+        }
+
         #qr-code {
             border: 3px solid #01664B;
             border-radius: 10px;
@@ -312,40 +371,78 @@
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
             if (/iPhone|iPad|iPod/.test(userAgent)) {
+                // ローディング画面を表示
+                showLoadingScreen("App Store", "ios");
+
                 // iOSはApp Storeへ直接リダイレクト
-                window.location.href = "https://apps.apple.com/jp/app/id6744021399";
+                setTimeout(function() {
+                    window.location.href = "https://apps.apple.com/jp/app/id6744021399";
+                }, 500);
+
                 // ブラウザ戻り時のフォールバック
                 setTimeout(function() {
-                    document.getElementById("mobile-fallback").style.display = "block";
-                    document.getElementById("message").style.display = "block";
-                    setupCopyButton();
+                    hideLoadingScreen();
+                    showMobileRedirect("ios");
                 }, 3000);
                 return;
             } else if (/Android/.test(userAgent)) {
+                // ローディング画面を表示
+                showLoadingScreen("Google Play", "android");
+
                 // AndroidはGoogle Play Storeへリダイレクト（フォールバック付き）
-                try {
-                    window.location.href = "market://details?id=org.ScoutAssociationofJapan.scoutup";
-                    // フォールバック: market://が動作しない場合はhttps://に変更
-                    setTimeout(function() {
+                setTimeout(function() {
+                    try {
+                        window.location.href = "market://details?id=org.ScoutAssociationofJapan.scoutup";
+                        // フォールバック: market://が動作しない場合はhttps://に変更
+                        setTimeout(function() {
+                            window.location.href = "https://play.google.com/store/apps/details?id=org.ScoutAssociationofJapan.scoutup";
+                        }, 1000);
+                    } catch (e) {
                         window.location.href = "https://play.google.com/store/apps/details?id=org.ScoutAssociationofJapan.scoutup";
-                    }, 1000);
-                    // ブラウザ戻り時のフォールバック
-                    setTimeout(function() {
-                        document.getElementById("mobile-fallback").style.display = "block";
-                        document.getElementById("message").style.display = "block";
-                        setupCopyButton();
-                    }, 3000);
-                } catch (e) {
-                    window.location.href = "https://play.google.com/store/apps/details?id=org.ScoutAssociationofJapan.scoutup";
-                    setTimeout(function() {
-                        document.getElementById("mobile-fallback").style.display = "block";
-                        document.getElementById("message").style.display = "block";
-                        setupCopyButton();
-                    }, 3000);
-                }
+                    }
+                }, 500);
+
+                // ブラウザ戻り時のフォールバック
+                setTimeout(function() {
+                    hideLoadingScreen();
+                    showMobileRedirect("android");
+                }, 3000);
                 return;
             }
         })();
+
+        function showLoadingScreen(storeName, platform) {
+            const loadingScreen = document.getElementById("loading-screen");
+            const loadingText = document.getElementById("loading-text");
+            const loadingSubtext = document.getElementById("loading-subtext");
+
+            loadingText.textContent = storeName + "に移動中...";
+            loadingSubtext.textContent = "しばらくお待ちください";
+            loadingScreen.classList.add("show");
+        }
+
+        function hideLoadingScreen() {
+            const loadingScreen = document.getElementById("loading-screen");
+            loadingScreen.classList.remove("show");
+        }
+
+        function showMobileRedirect(platform) {
+            const mobileRedirect = document.getElementById("mobile-redirect");
+            const storeButton = document.getElementById("store-button");
+            const storeButtonText = document.getElementById("store-button-text");
+
+            if (platform === "ios") {
+                storeButton.href = "https://apps.apple.com/jp/app/id6744021399";
+                storeButtonText.textContent = "📱 App Store でダウンロード";
+                storeButton.className = "store-button ios-button";
+            } else {
+                storeButton.href = "https://play.google.com/store/apps/details?id=org.ScoutAssociationofJapan.scoutup";
+                storeButtonText.textContent = "📱 Google Play でダウンロード";
+                storeButton.className = "store-button android-button";
+            }
+
+            mobileRedirect.style.display = "block";
+        }
 
         window.onload = function () {
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -390,6 +487,34 @@
 </head>
 
 <body>
+    <!-- ローディング画面 -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-spinner"></div>
+        <div id="loading-text" class="loading-text">ストアに移動中...</div>
+        <div id="loading-subtext" class="loading-subtext">しばらくお待ちください</div>
+    </div>
+
+    <!-- モバイル専用のリダイレクト画面 -->
+    <div id="mobile-redirect" class="mobile-redirect">
+        <div class="app-title">
+            <img src="icon.png" alt="Scout UP! Logo" class="app-logo">
+            Scout UP!
+        </div>
+
+        <p><strong>アプリストアから戻ってきましたか？</strong><br />
+        下記のボタンから再度アクセスできます。</p>
+
+        <div style="margin: 30px 0;">
+            <a id="store-button" href="#" class="store-button" target="_blank">
+                <span id="store-button-text">📱 ダウンロード</span>
+            </a>
+        </div>
+
+        <div class="copyright">
+            &copy; Scout Association of Japan. All Rights Reserved.
+        </div>
+    </div>
+
     <div id="message" class="message" style="display: none;">
         <div class="app-title">
             <img src="icon.png" alt="Scout UP! Logo" class="app-logo">
