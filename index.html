@@ -367,7 +367,41 @@
         }
     </style>
     <script>
-        (function() {
+        function showLoadingScreen(storeName, platform) {
+            const loadingScreen = document.getElementById("loading-screen");
+            const loadingText = document.getElementById("loading-text");
+            const loadingSubtext = document.getElementById("loading-subtext");
+
+            loadingText.textContent = storeName + "に移動中...";
+            loadingSubtext.textContent = "しばらくお待ちください";
+            loadingScreen.classList.add("show");
+        }
+
+        function hideLoadingScreen() {
+            const loadingScreen = document.getElementById("loading-screen");
+            loadingScreen.classList.remove("show");
+        }
+
+        function showMobileRedirect(platform) {
+            const mobileRedirect = document.getElementById("mobile-redirect");
+            const storeButton = document.getElementById("store-button");
+            const storeButtonText = document.getElementById("store-button-text");
+
+            if (platform === "ios") {
+                storeButton.href = "https://apps.apple.com/jp/app/id6744021399";
+                storeButtonText.textContent = "App Store でダウンロード";
+                storeButton.className = "store-button ios-button";
+            } else {
+                storeButton.href = "https://play.google.com/store/apps/details?id=org.ScoutAssociationofJapan.scoutup";
+                storeButtonText.textContent = "Google Play でダウンロード";
+                storeButton.className = "store-button android-button";
+            }
+
+            mobileRedirect.style.display = "block";
+        }
+
+        // DOM読み込み完了後に実行
+        document.addEventListener('DOMContentLoaded', function() {
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
             if (/iPhone|iPad|iPod/.test(userAgent)) {
@@ -409,40 +443,7 @@
                 }, 3000);
                 return;
             }
-        })();
-
-        function showLoadingScreen(storeName, platform) {
-            const loadingScreen = document.getElementById("loading-screen");
-            const loadingText = document.getElementById("loading-text");
-            const loadingSubtext = document.getElementById("loading-subtext");
-
-            loadingText.textContent = storeName + "に移動中...";
-            loadingSubtext.textContent = "しばらくお待ちください";
-            loadingScreen.classList.add("show");
-        }
-
-        function hideLoadingScreen() {
-            const loadingScreen = document.getElementById("loading-screen");
-            loadingScreen.classList.remove("show");
-        }
-
-        function showMobileRedirect(platform) {
-            const mobileRedirect = document.getElementById("mobile-redirect");
-            const storeButton = document.getElementById("store-button");
-            const storeButtonText = document.getElementById("store-button-text");
-
-            if (platform === "ios") {
-                storeButton.href = "https://apps.apple.com/jp/app/id6744021399";
-                storeButtonText.textContent = "📱 App Store でダウンロード";
-                storeButton.className = "store-button ios-button";
-            } else {
-                storeButton.href = "https://play.google.com/store/apps/details?id=org.ScoutAssociationofJapan.scoutup";
-                storeButtonText.textContent = "📱 Google Play でダウンロード";
-                storeButton.className = "store-button android-button";
-            }
-
-            mobileRedirect.style.display = "block";
-        }
+        });
 
         window.onload = function () {
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -501,12 +502,11 @@
             Scout UP!
         </div>
 
-        <p><strong>アプリストアから戻ってきましたか？</strong><br />
-        下記のボタンから再度アクセスできます。</p>
+        <p>下記のボタンから再度アクセスできます。</p>
 
         <div style="margin: 30px 0;">
             <a id="store-button" href="#" class="store-button" target="_blank">
-                <span id="store-button-text">📱 ダウンロード</span>
+                <span id="store-button-text">ダウンロード</span>
             </a>
         </div>
 
