@@ -431,11 +431,16 @@
         document.addEventListener('DOMContentLoaded', function() {
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-            if (/iPhone|iPad|iPod/.test(userAgent)) {
+            // タブレットも含めた判定: iPadOS 13以降やAndroidタブレットも検出
+            const isIOS = /iPhone|iPad|iPod/.test(userAgent) ||
+                          (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            const isAndroid = /Android/.test(userAgent);
+
+            if (isIOS) {
                 // ローディング画面を表示
                 showLoadingScreen("App Store", "ios");
 
-                // iOSはApp Storeへ直接リダイレクト
+                // iOSデバイス(iPhone/iPad/iPod)はApp Storeへ直接リダイレクト
                 setTimeout(function() {
                     window.location.href = "https://apps.apple.com/jp/app/id6744021399";
                 }, 500);
@@ -446,11 +451,11 @@
                     showMobileRedirect("ios");
                 }, 3000);
                 return;
-            } else if (/Android/.test(userAgent)) {
+            } else if (isAndroid) {
                 // ローディング画面を表示
                 showLoadingScreen("Google Play", "android");
 
-                // AndroidはGoogle Play Storeへリダイレクト（フォールバック付き）
+                // Androidデバイス(スマホ/タブレット)はGoogle Play Storeへリダイレクト（フォールバック付き）
                 setTimeout(function() {
                     try {
                         window.location.href = "market://details?id=org.ScoutAssociationofJapan.scoutup";
@@ -475,7 +480,12 @@
         window.onload = function () {
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-            if (!/iPhone|iPad|iPod|Android/.test(userAgent)) {
+            // タブレットも含めた判定
+            const isIOS = /iPhone|iPad|iPod/.test(userAgent) ||
+                          (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            const isAndroid = /Android/.test(userAgent);
+
+            if (!isIOS && !isAndroid) {
                 // PCなどその他のデバイス
                 document.getElementById("message").style.display = "block";
                 setupCopyButton();
